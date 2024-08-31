@@ -22,7 +22,7 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    @task = @user.tasks.new(task_params)
+    @task = @user.tasks.new(create_task_params)
     if @task.save
       redirect_to task_url(@task), notice: "Task was successfully created."
     else
@@ -32,7 +32,7 @@ class TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
-    if @task.update(task_params)
+    if @task.update(update_task_params)
       redirect_to task_url(@task), notice: "Task was successfully updated."
     else
       render :edit, status: :unprocessable_entity
@@ -56,8 +56,11 @@ class TasksController < ApplicationController
       @user = User.first
     end
 
-    # Only allow a list of trusted parameters through.
-    def task_params
+    def create_task_params
       params.require(:task).permit(:title, :description, :priority, :due_date)
+    end
+
+    def update_task_params
+      params.require(:task).permit(:title, :description, :priority, :due_date, :completed)
     end
 end

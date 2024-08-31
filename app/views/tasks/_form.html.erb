@@ -31,6 +31,13 @@
     <%= form.datetime_field :due_date %>
   </div>
 
+  <% if edit %>
+    <div>
+      <%= form.label :completed, style: "display: block" %>
+      <%= form.check_box :completed %>
+    </div>
+  <% end %>
+
   <div>
     <%= form.submit %>
   </div>

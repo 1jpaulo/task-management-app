@@ -21,6 +21,6 @@
 
   <p>
     <strong>Completed:</strong>
-    <%= task.completed %>
+    <%= check_box_tag("completed", false, task.completed, disabled: true) %>
   </p>
 </div>

@@ -2,7 +2,7 @@
 
 <h1>Editing task</h1>
 
-<%= render "form", task: @task %>
+<%= render partial: "form", locals: { task: @task, edit: true } %>
 
 <br>
 
