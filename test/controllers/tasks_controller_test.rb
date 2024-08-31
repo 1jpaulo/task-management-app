@@ -17,7 +17,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
 
   test "should create task" do
     assert_difference("Task.count") do
-      post tasks_url, params: { task: { completed: @task.completed, description: @task.description, due_date: @task.due_date, priority: @task.priority, title: @task.title, user_id: @task.user_id } }
+      post tasks_url, params: { task: { description: @task.description, due_date: @task.due_date, priority: @task.priority, title: @task.title } }
     end
 
     assert_redirected_to task_url(Task.last)
