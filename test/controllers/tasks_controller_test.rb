@@ -2,12 +2,22 @@ require "test_helper"
 
 class TasksControllerTest < ActionDispatch::IntegrationTest
   setup do
+    # TODO: when user auth is done, make sure fixture users(:one) is our guy
     @task = tasks(:one)
   end
 
-  test "should get index" do
+  test "should get index with only users owned tasks" do
     get tasks_url
     assert_response :success
+
+    # TODO: this is not currently working because I'm getting the first user of the DB and it will be different
+    # in the test.
+    # Auth is necessary so I can then create a test helper to sign in the correct user in the setup
+    # assert_match @task.title, response.body
+
+    # @task_other_user = tasks(:two)
+
+    # assert_no_match @task_other_user.title, response.body
   end
 
   test "should get new" do
@@ -34,7 +44,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update task" do
-    patch task_url(@task), params: { task: { completed: @task.completed, description: @task.description, due_date: @task.due_date, priority: @task.priority, title: @task.title, user_id: @task.user_id } }
+    patch task_url(@task), params: { task: { completed: @task.completed, description: @task.description, due_date: @task.due_date, priority: @task.priority, title: @task.title } }
     assert_redirected_to task_url(@task)
   end
 
