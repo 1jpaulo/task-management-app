@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
 
-  # TODO: TEST all of it below.
   has_many :tasks, dependent: :destroy
 
   # No registration page in this application, but this validations would apply for console operations as well.

@@ -11,33 +11,33 @@ class UserTest < ActiveSupport::TestCase
 
   test "should not create user with invalid email" do
     @user.email = nil
-    @user.save
 
-    assert_equal 2, @user.errors.count
-    assert_equal 2, (["Email is invalid", "Email can't be blank"] & @user.errors.full_messages).count
+    assert_raises(ActiveRecord::RecordInvalid, match: "Email can't be blank, Email is invalid") do
+      @user.save!
+    end
   end
 
   test "should not create user with invalid username" do
     @user.username = nil
-    @user.save
 
-    assert_equal 1, @user.errors.count
-    assert_equal "Username can't be blank", @user.errors.first.full_message
+    assert_raises(ActiveRecord::RecordInvalid, match: "Username can't be blank") do
+      @user.save!
+    end
   end
 
   test "should not create user with duplicated email" do
     @user.email = users(:one).email
-    @user.save
 
-    assert_equal 1, @user.errors.count
-    assert_equal "Email has already been taken", @user.errors.first.full_message
+    assert_raises(ActiveRecord::RecordInvalid, match: "Email has already been taken") do
+      @user.save!
+    end
   end
 
   test "should not create user with duplicated username" do
     @user.username = users(:one).username
-    @user.save
 
-    assert_equal 1, @user.errors.count
-    assert_equal "Username has already been taken", @user.errors.first.full_message
+    assert_raises(ActiveRecord::RecordInvalid, match: "Username has already been taken") do
+      @user.save!
+    end
   end
 end
