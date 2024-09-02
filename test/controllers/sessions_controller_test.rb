@@ -17,6 +17,6 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     user = users(:one)
     sign_in(user)
     delete session_url(user.id)
-    assert_redirected_to root_path
+    assert_redirected_to new_session_path
   end
 end
