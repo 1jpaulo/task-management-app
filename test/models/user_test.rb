@@ -17,6 +17,13 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  test "should create user with normalized email" do
+    @user.email = "tHerE@eXamPle.coM"
+
+    assert @user.save
+    assert_equal "tHerE@eXamPle.coM".downcase, @user.email
+  end
+
   test "should not create user with invalid username" do
     @user.username = nil
 

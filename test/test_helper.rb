@@ -2,6 +2,9 @@ ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
 
+# require helper files so I can include them when needed
+Dir[Rails.root.join("test/helpers/**/*.rb")].each { |file| require file }
+
 module ActiveSupport
   class TestCase
     # Run tests in parallel with specified workers

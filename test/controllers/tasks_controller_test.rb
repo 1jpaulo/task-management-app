@@ -1,23 +1,22 @@
 require "test_helper"
 
 class TasksControllerTest < ActionDispatch::IntegrationTest
+  include AuthHelper
+
   setup do
-    # TODO: when user auth is done, make sure fixture users(:one) is our guy
+    sign_in(users(:one))
     @task = tasks(:one)
   end
 
   test "should get index with only users owned tasks" do
     get tasks_url
+
     assert_response :success
+    assert_match @task.title, response.body
 
-    # TODO: this is not currently working because I'm getting the first user of the DB and it will be different
-    # in the test.
-    # Auth is necessary so I can then create a test helper to sign in the correct user in the setup
-    # assert_match @task.title, response.body
+    @task_other_user = tasks(:two)
 
-    # @task_other_user = tasks(:two)
-
-    # assert_no_match @task_other_user.title, response.body
+    assert_no_match @task_other_user.title, response.body
   end
 
   test "should get new" do

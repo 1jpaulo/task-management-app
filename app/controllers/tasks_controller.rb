@@ -1,10 +1,9 @@
 class TasksController < ApplicationController
+  before_action :current_user
   before_action :set_task, only: %i[ show edit update destroy ]
-  before_action :set_user, only: %i[ index create ]
 
   # GET /tasks or /tasks.json
   def index
-    # TODO: check controller tests TODO message
     @tasks = @user.tasks
   end
 
@@ -49,15 +48,11 @@ class TasksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
-      # TODO: handle error when task is not found
-      # it will be a possibility when auth is coded and we use
-      # `@user.tasks.find(params[:id])` instead of current line
-      @task = Task.find(params[:id])
+      @task = @user.tasks.find(params[:id])
     end
 
-    def set_user
-      # TODO: while auth is not coded
-      @user = User.first
+    def current_user
+      @user = User.find(session[:user_id])
     end
 
     def create_task_params
