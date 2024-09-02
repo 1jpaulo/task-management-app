@@ -4,6 +4,7 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
+    # TODO: paginate and show it in the table
     @tasks = @user.tasks
   end
 

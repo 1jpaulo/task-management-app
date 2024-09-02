@@ -16,7 +16,9 @@
 
   <p>
     <strong>Due date:</strong>
-    <%= task.due_date %>
+    <% # Only removed timezone reference. Using ISO 8601 format as default.
+      # Ideally there should have an users column to hold data per user level so he can freely choose how to display. %>
+    <%= task.due_date.strftime("%Y-%m-%d, %H:%M:%S") %>
   </p>
 
   <p>
