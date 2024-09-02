@@ -46,20 +46,17 @@ class TasksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      @task = @user.tasks.find(params[:id])
-    end
 
-    def current_user
-      @user = User.find(session[:user_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_task
+    @task = @user.tasks.find(params[:id])
+  end
 
-    def create_task_params
-      params.require(:task).permit(:title, :description, :priority, :due_date)
-    end
+  def create_task_params
+    params.require(:task).permit(:title, :description, :priority, :due_date)
+  end
 
-    def update_task_params
-      params.require(:task).permit(:title, :description, :priority, :due_date, :completed)
-    end
+  def update_task_params
+    params.require(:task).permit(:title, :description, :priority, :due_date, :completed)
+  end
 end
