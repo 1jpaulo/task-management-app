@@ -11,3 +11,17 @@
 }
 
 */
+
+@layer base {
+  button, input[type="submit"] {
+    @apply px-4 py-2 font-semibold text-white bg-red-500 rounded-md hover:bg-red-600;
+  }
+
+  a {
+    @apply text-red-500 underline hover:text-red-600;
+  }
+
+  h1 {
+    @apply text-3xl font-bold text-red-500 my-4;
+  }
+}
