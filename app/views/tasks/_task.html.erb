@@ -11,7 +11,7 @@
 
   <p>
     <strong>Priority:</strong>
-    <%= task.priority %>
+    <%= Task::PRIORITY_LIST.key(task.priority) %>
   </p>
 
   <p>

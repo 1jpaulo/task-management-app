@@ -1,7 +1,7 @@
 <header id="user-bar" class="bg-red-500 h-14 flex flex-row-reverse">
-  <div class="text-white my-auto mr-6">
+  <div class="text-white my-auto h-full mr-6 items-center">
     <% unless current_user.nil? %>
-      <%= button_tag(id: "current-user-logout", class: "border-white border-2 h-100 flex flex-row") do %>
+      <%= button_tag(id: "current-user-logout", class: "rounded-none h-full flex flex-row items-center") do %>
         <%= current_user.username %>
         <svg class="w-2.5 my-auto ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -10,7 +10,7 @@
     <% end %>
   </div>
   <div id="dropdown" class="fixed my-14 mr-6 z-10 hidden rounded w-44 bg-gray-700">
-    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="current-user-logout">
+    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
       <li>
         <%= button_to("Logout",
                       session_url(current_user&.id),

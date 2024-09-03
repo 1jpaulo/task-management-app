@@ -9,3 +9,18 @@ two:
   username: secondUser
   email: seconduser@example.com
   password_digest: <%= BCrypt::Password.create("secret") %>
+
+three:
+  username: thirdUser
+  email: thirduser@example.com
+  password_digest: <%= BCrypt::Password.create("password123") %>
+
+four:
+  username: fourthUser
+  email: fourthuser@example.com
+  password_digest: <%= BCrypt::Password.create("pass456") %>
+
+five:
+  username: fifthUser
+  email: fifthuser@example.com
+  password_digest: <%= BCrypt::Password.create("supersecret") %>

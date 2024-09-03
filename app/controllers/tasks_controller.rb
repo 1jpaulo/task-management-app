@@ -4,8 +4,12 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    # TODO: paginate and show it in the table
+    priority_order = params[:priority_order].in?(%w[asc desc]) ? params[:priority_order] : nil
+    due_date_order = params[:due_date_order].in?(%w[asc desc]) ? params[:due_date_order] : nil
+
     @tasks = @user.tasks
+    @tasks = @tasks.order(due_date: due_date_order) if due_date_order
+    @tasks = @tasks.order(priority: priority_order) if priority_order
   end
 
   # GET /tasks/1 or /tasks/1.json

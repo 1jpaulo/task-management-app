@@ -4,7 +4,7 @@ class TaskTest < ActiveSupport::TestCase
   setup do
     @task = users(:one).tasks.new(title: "MyString",
                                   description: "MyText",
-                                  priority: "high",
+                                  priority: 1,
                                   due_date: Time.now)
   end
 
@@ -37,7 +37,7 @@ class TaskTest < ActiveSupport::TestCase
   end
 
   test "should not create task with priority value outside priority list" do
-    @task.priority = "something"
+    @task.priority = 4
 
     assert_raises(ActiveRecord::RecordInvalid, match: "Priority is not included in the list") do
       @task.save!

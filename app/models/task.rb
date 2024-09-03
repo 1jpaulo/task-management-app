@@ -1,9 +1,9 @@
 class Task < ApplicationRecord
   belongs_to :user
 
-  PRIORITY_LIST = %w[ low medium high urgent].freeze
+  PRIORITY_LIST = { Low: 1, Medium: 2, High: 3 }.freeze
 
   validates :title, presence: true
-  validates :priority, presence: true, inclusion: { in: PRIORITY_LIST }
+  validates :priority, presence: true, inclusion: { in: PRIORITY_LIST.values }
   validates :due_date, presence: true
 end

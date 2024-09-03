@@ -4,18 +4,33 @@
 
 <h1>Tasks</h1>
 
-<%= link_to "New task", new_task_path %>
+<div class="flex justify-between items-center mb-4">
+  <%= link_to "New task", new_task_path %>
+  <div>
+    Order by:
+    <%= form_with(url: tasks_path, method: :get, class: "inline") do %>
+      <%= button_tag "Due Date (#{params[:due_date_order] == 'desc' ? 'asc' : 'desc'})", 
+                    type: 'submit', 
+                    name: 'due_date_order', 
+                    value: (params[:due_date_order] == 'desc' ? 'asc' : 'desc') %>
+    <% end %>
+
+    <%= form_with(url: tasks_path, method: :get, class: "inline") do %>
+      <%= button_tag "Priority (#{params[:priority_order] == 'desc' ? 'asc' : 'desc'})", 
+                    type: 'submit', 
+                    name: 'priority_order', 
+                    value: (params[:priority_order] == 'desc' ? 'asc' : 'desc') %>
+    <% end %>
+  </div>
+</div>
 
 <div id="tasks">
-  <%# TODO: display as a table with column filtering by priority and due date
-    # this filtering may be done server side for faster development
-    # if this was to be filtered with js in client-side I would need to pass all data
-    # at once and paginate client-side, thus transfering more data. %>
-  <%# TODO: check task controller index action %>
   <% @tasks.each do |task| %>
-    <%= render task %>
-    <p>
-      <%= link_to "Show this task", task %>
-    </p>
+    <div class="<%= cycle("bg-red-300", "bg-white") -%> p-6 box-border">
+      <%= render task %>
+      <p>
+        <%= link_to "Show this task", task %>
+      </p>
+    </div>
   <% end %>
 </div>
