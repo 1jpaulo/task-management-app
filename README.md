@@ -1,24 +1,31 @@
-# README
+### Installation processes will differ from OSes
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Make sure you have ruby installed
 
-Things you may want to cover:
+### Install bundler
+`$ gem install bundler`
 
-* Ruby version
+### Install redis
+`$ yay -S redis`
 
-* System dependencies
+### Start Redis service
+`$ systemctl start redis.service`
 
-* Configuration
+### Go to the project folder
+`$ bundle install`
 
-* Database creation
+### Load whole schema instead of migrating
+`$ rails db:schema:load`
 
-* Database initialization
+### Load fixtures to db
+`$ rails db:fixtures:load`
 
-* How to run the test suite
+### Start the project
+`$ rails s`
 
-* Services (job queues, cache servers, search engines, etc.)
+### If you want to send real emails, you will need to either change `app/mailers/application_mailer.rb` or for a global-wide change `config/environments/$RAILS_ENV.rb`
 
-* Deployment instructions
+### Start sidekiq to run background notification workers
+`$ bundle exec sidekiq`
 
-* ...
+### Go to localhost:3000

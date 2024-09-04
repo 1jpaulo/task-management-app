@@ -6,4 +6,7 @@ class Task < ApplicationRecord
   validates :title, presence: true
   validates :priority, presence: true, inclusion: { in: PRIORITY_LIST.values }
   validates :due_date, presence: true
+
+  scope :overdue, -> { where("due_date < ?", Time.current) }
+  scope :incomplete, -> { where(completed: false) }
 end

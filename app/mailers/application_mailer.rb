@@ -1,4 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "from@example.com"
+  # NOTE: if you want a global wide change, comment this and change in config/environments/$RAILS_ENV.rb
+  default from: "fromotherplace@example.com"
   layout "mailer"
 end
