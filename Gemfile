@@ -59,3 +59,5 @@ end
 gem "tailwindcss-rails", "~> 2.7"
 
 gem "sidekiq-cron", "~> 1.12"
+
+gem "will_paginate", "~> 4.0"

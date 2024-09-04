@@ -7,7 +7,7 @@ class TasksController < ApplicationController
     priority_order = params[:priority_order].in?(%w[asc desc]) ? params[:priority_order] : nil
     due_date_order = params[:due_date_order].in?(%w[asc desc]) ? params[:due_date_order] : nil
 
-    @tasks = @user.tasks
+    @tasks = @user.tasks.paginate(page: params[:page], per_page: 3)
     @tasks = @tasks.order(due_date: due_date_order) if due_date_order
     @tasks = @tasks.order(priority: priority_order) if priority_order
   end
