@@ -1,0 +1,22 @@
+<div id="<%= dom_id task %>"
+     class="w-60 mx-2 rounded-lg border mb-4 border-gray-300 box-border shadow-sm hover:shadow-gray-400 max-h-72 overflow-hidden"
+     data-controller="card"
+     data-action="click->card#toggleExpansion"
+     data-card-is-expanded-value="false">
+  <!-- TODO: perhaps it should have hidden overflow and only be able to see when expanded, so scrolling won't be a problem when mouse is over a card -->
+  <!-- TODO: change max-h-72 to an adaptable height like keep -->
+  <!-- TODO: clicking twice (in title and in text) makes it expand and retract, fix it to only retract when clicking outside -->
+  <!-- pb-2 here is because the new card is cutting half of the last line for some reason, but this will push higher than expected the other cards -->
+  <div class="card-content w-full overflow-y-auto overflow-x-hidden max-h-72 pb-2">
+    <!-- TODO: change contenteditable to true when showing magnified card on click -->
+    <div class="px-3 py-2 border-b border-dashed border-gray-300 text-red-800 font-semibold" contenteditable="true">
+      <%= number %> Ominous Title
+    </div>
+    <div class="px-3 py-2" contenteditable="true">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+  </div>
+</div>

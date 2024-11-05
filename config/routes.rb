@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "tasks#index"
-  resources :tasks
+  resources :tasks do
+    collection do
+      post :create_card
+    end
+  end
   resources :sessions, only: %i[new create destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en"> <!-- # TODO: change this depending on locale -->
   <head>
     <title><%= content_for(:title) || "Task Management App" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="turbo-prefetch" content="false">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= yield :head %>
 
     <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="icon" href="/favicon.ico" type="image/ico">
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
@@ -20,9 +20,9 @@
 
   <body>
     <div class="flex flex-col h-full">
-      <%= render partial: "layouts/user_bar" %>
+      <%= render partial: "layouts/header" %>
 
-      <main class="container flex flex-col flex-1 px-5 mx-auto my-6">
+      <main class="flex flex-col h-full px-2">
         <%= yield %>
       </main>
     </div>
