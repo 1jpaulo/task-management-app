@@ -23,6 +23,9 @@ export default class extends Controller {
     this.newCardTarget.style.transition = 'all .4s ease-in'
 
     // a delay is needed to make turbo-stream request be made
+    // TODO: remove setTimeout and try to use a response after turbo stream append, like we would have with a 
+    // `fetch(url).then(applyHtml)` approach, so we can disable the create button asynchronously
+    // or try to use a js.erb if this is evaluated after the turbo created
     setTimeout(() => this.disableButton(), 100)
   }
 

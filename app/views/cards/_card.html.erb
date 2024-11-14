@@ -1,0 +1,20 @@
+<div id="<%= dom_id card %>"
+     class="w-60 mx-2 rounded-lg border mb-4 border-gray-300 box-border shadow-sm hover:shadow-gray-400 max-h-72 overflow-hidden"
+     data-controller="card"
+     data-action="click->card#toggleExpansion"
+     data-card-is-expanded-value="false">
+  <% #  TODO: perhaps it should have hidden overflow and only be able to see when expanded, so scrolling won't be a problem when mouse is over a card  %>
+  <% #  TODO: change max-h-72 to an adaptable height like keep  %>
+  <% #  TODO: clicking twice (in title and in text) makes it expand and retract, fix it to only retract when clicking outside  %>
+  <% #  pb-2 here is because the new card is cutting half of the last line for some reason, but this will push higher than expected the other cards  %>
+  <div class="card-content w-full overflow-y-auto overflow-x-hidden max-h-72 pb-2">
+    <% #  TODO: change contenteditable to true when showing magnified card on click  %>
+    <% #  TODO: put placeholders for title and text  %>
+    <div class="px-3 py-2 border-b border-dashed border-gray-300 text-red-800 font-semibold" contenteditable="true">
+      <%= card.title %>
+    </div>
+    <div class="px-3 py-2" contenteditable="true">
+      <%= card.text %>
+    </div>
+  </div>
+</div>

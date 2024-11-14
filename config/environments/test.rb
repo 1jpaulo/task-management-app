@@ -47,10 +47,6 @@ Rails.application.configure do
   # incoming request so you'll need to provide the :host parameter yourself.
   config.action_mailer.default_url_options = { host: "www.example.com" }
 
-  # NOTE: Put your email here to send real emails with global wide email.
-  # TODO: Use .env files to use ENV variables.
-  config.action_mailer.default_options = { from: "fromotherplace@example.com" }
-
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 

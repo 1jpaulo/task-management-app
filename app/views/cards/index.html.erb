@@ -1,10 +1,10 @@
-<% content_for :title, "Notes" %>
+<% content_for :title, "Cards" %>
 
 <div data-controller="card">
   <div class="h-14 my-4">
-    <!-- TODO: Add search tag afterwards -->
+    <% #  TODO: Add search tag afterwards  %>
     <%= button_to 'Create',
-                  create_card_tasks_path,
+                  create_card_cards_path,
                   method: :post,
                   data: { action: 'card#transition', 'card-target' => 'createButton' },
                   form: { data: { turbo: true }, class: 'w-full flex justify-center' },
@@ -17,13 +17,13 @@
 </div>
 
 <div id="workspace" class="mb-4">
-  <div class="mx-auto"> <!-- TODO: not working as it should -->
-    <div id="tasks" class="flex flex-row flex-wrap flex-1">
-      <% @tasks.each_with_index do |task, idx| %>
-        <%= render partial: "shared/card", locals: { task: task, number: idx + 1 } %>
+  <div class="mx-auto">
+  <% #  TODO: not working as it should  %>
+  <% # TODO: show placeholder image or div to take the empty space when no card is created %>
+    <div id="cards" class="flex flex-row flex-wrap flex-1">
+      <% @cards.each do |card| %>
+        <%= render partial: "card", locals: { card: card } %>
       <% end %>
     </div>
   </div>
-
-  <%# will_paginate @tasks, class: "bg-gray-300 mt-4 box-border p-2" %>
 <div>
