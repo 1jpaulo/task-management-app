@@ -1,1 +1,1 @@
-<%= turbo_stream.append "new_card", partial: "card", locals: { card: @card } %>
+<%= turbo_stream.append "new_card", partial: "card", locals: { card: @card, new_card: true } %>

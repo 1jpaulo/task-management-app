@@ -1,8 +1,10 @@
 <div id="<%= dom_id card %>"
-     class="w-60 mx-2 rounded-lg border mb-4 border-gray-300 box-border shadow-sm hover:shadow-gray-400 max-h-72 overflow-hidden"
-     data-controller="card"
-     data-action="click->card#toggleExpansion"
-     data-card-is-expanded-value="false">
+  class="w-60 mx-2 rounded-lg border mb-4 border-gray-300 box-border shadow-sm hover:shadow-gray-400 max-h-72 overflow-hidden"
+  data-controller="card"
+  data-action="click->card#toggleExpansion"
+  data-card-is-expanded-value="false"
+  data-card-is-new-value="<%= new_card %>"
+>
   <% #  TODO: perhaps it should have hidden overflow and only be able to see when expanded, so scrolling won't be a problem when mouse is over a card  %>
   <% #  TODO: change max-h-72 to an adaptable height like keep  %>
   <% #  TODO: clicking twice (in title and in text) makes it expand and retract, fix it to only retract when clicking outside  %>
