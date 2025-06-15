@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :cards do
     collection do
-      post :create_card
+      post :card
     end
   end
   resources :sessions, only: %i[new create destroy]

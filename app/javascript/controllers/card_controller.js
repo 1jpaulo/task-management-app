@@ -1,7 +1,10 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  static targets = ['newCard', 'createButton']
+  static targets = [
+    'title', 'text', 'titleInput', 'textInput'
+  ]
+
   static values = {
     isExpanded: Boolean,
     isNew: Boolean,
@@ -12,12 +15,15 @@ export default class extends Controller {
    * which will disable the create button until the card is added to the workspace
    */
   connect() {
+    if (!this.isNewValue) return;
+
+    this.element.dispatchEvent(new CustomEvent("card:added", { bubbles: true }))
+    this.addKeyMapping()
+  }
+
+  disconnect() {
     if (this.isNewValue) {
-      this.element.dispatchEvent(new CustomEvent("card:added", { bubbles: true }))
-      // remove state of new card since it was already added
-      this.isNewValue = false
-    } else {
-      this.element.addEventListener("card:added", this.disableButton.bind(this))
+      document.dispatchEvent(new CustomEvent("card:saved", { bubbles: true}))
     }
   }
 
@@ -32,14 +38,23 @@ export default class extends Controller {
     this.element.style.transition = 'all .4s ease-in'
   }
 
-  toggleCreateSlide() {
-    this.newCardTarget.classList.toggle('max-h-[18rem]')
-    this.newCardTarget.style.transition = 'all .4s ease-in'
+  addKeyMapping() {
+    // TODO: instead of keydown (that can't be 'enter' because of newline), trigger pushcard sending over like websocket or SSE
+    // as the user type OR when element lose focus (esc pressed - could use some mapping elsewhere and only grab a dict for that)
+    // or by clicking outside
+    this.element.addEventListener('keydown', (evt) => {
+      if (evt.keyCode === 27) this.pushCard()
+    })
   }
 
-  disableButton() {
-    // TODO: enableButton again when losing focus of the card
-    this.createButtonTarget.disabled = true
-    this.createButtonTarget.classList.add('cursor-not-allowed', 'opacity-50')
+  pushCard() {
+    this.copyContentFromEditableDiv()
+    this.element.requestSubmit()
+  }
+
+  copyContentFromEditableDiv() {
+    // TODO: Validation needed.
+    this.titleInputTarget.value = this.titleTarget.innerText
+    this.textInputTarget.value = this.textTarget.innerText
   }
 }

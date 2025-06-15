@@ -9,19 +9,14 @@ class CardsController < ApplicationController
   def show
   end
 
-  def create_card
+  def card
     @card = @user.cards.build
-    respond_to do |format|
-      format.turbo_stream
-    end
   end
 
   def create
     @card = @user.cards.new(card_params)
 
-    if @card.save
-      render json: { message: "Record created successfully" }, status: :created
-    else
+    unless @card.save
       render json: @card.errors, status: :unprocessable_entity
     end
   end

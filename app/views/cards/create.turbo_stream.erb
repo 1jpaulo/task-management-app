@@ -1,0 +1,3 @@
+<%= turbo_stream.prepend "cards", partial: "card", locals: { card: @card, new_card: false } %>
+<%= turbo_stream.remove "new-form" %>
+<%= turbo_stream.remove "no-card-message" %>

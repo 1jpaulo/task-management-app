@@ -1,28 +1,31 @@
 <% content_for :title, "Cards" %>
 
-<div data-controller="card">
+<div data-controller="card-generator">
   <div class="h-14 my-4">
-    <% #  TODO: Add search tag afterwards  %>
     <%= button_to 'Create',
-                  create_card_cards_path,
+                  card_cards_path,
                   method: :post,
-                  data: { action: 'card#toggleCreateSlide', 'card-target' => 'createButton' },
-                  form: { data: { turbo: true }, class: 'w-full flex justify-center' },
+                  data: { turbo: true, action: 'card-generator#toggleSlide', 'card-generator-target' => 'createButton' },
+                  form: { class: 'w-full flex justify-center' },
                   class: 'w-1/6 px-2 bg-red-600 hover:shadow-[1px_1px_3px_rgba(0,0,0,0.2)]' %>
   </div>
 
-  <div id="new_card"
-      class="flex justify-center transition-all duration-500 ease-in-out max-h-0 overflow-hidden"
-      data-card-target="newCard"></div>
+  <div id="new-card"
+      class="flex justify-center transition-all duration-[1.3s] ease-in-out max-h-0 overflow-hidden"
+      data-card-generator-target="newCard"></div>
 </div>
 
 <div id="workspace" class="mb-4">
   <div class="mx-auto">
-  <% #  TODO: not working as it should  %>
-  <% # TODO: show placeholder image or div to take the empty space when no card is created %>
     <div id="cards" class="flex flex-row flex-wrap flex-1">
-      <% @cards.each do |card| %>
-        <%= render partial: "card", locals: { card: card, new_card: false } %>
+      <% if @cards.any? %>
+          <% @cards.each do |card| %>
+            <%= render partial: "card", locals: { card: card, new_card: false } %>
+          <% end %>
+      <% else %>
+        <h2 id="no-card-message" class="w-full flex justify-center text-3xl font-semibold text-red-700">
+          No cards yet.
+        </h2>
       <% end %>
     </div>
   </div>
