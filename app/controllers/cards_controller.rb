@@ -17,6 +17,7 @@ class CardsController < ApplicationController
     @card = @user.cards.new(card_params)
 
     unless @card.save
+      # TODO: Rather use hotwire approach than json error messages
       render json: @card.errors, status: :unprocessable_entity
     end
   end

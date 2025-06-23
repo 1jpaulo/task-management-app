@@ -10,32 +10,35 @@ export default class extends Controller {
     isNew: Boolean,
   }
 
-  /**
-   * Dispatches a card added event when state is new is true,
-   * which will disable the create button until the card is added to the workspace
-   */
   connect() {
-    if (!this.isNewValue) return;
+    if (!this.isNewValue) return
 
-    this.element.dispatchEvent(new CustomEvent("card:added", { bubbles: true }))
+    this.titleTarget.focus()
+    this.element.addEventListener('focusout', this.#dismissOnFocusOut.bind(this))
+    this.element.dispatchEvent(new CustomEvent('card:added', { bubbles: true }))
     this.addKeyMapping()
   }
 
   disconnect() {
     if (this.isNewValue) {
-      document.dispatchEvent(new CustomEvent("card:saved", { bubbles: true}))
+      document.dispatchEvent(new CustomEvent('card:saved', { bubbles: true}))
     }
   }
 
   initialize() {
-    this.width = ['15rem', '45rem']
+    this.width = {
+      'small': '15rem',
+      'large': '45rem'
+    }
   }
 
-  toggleExpansion() {
-    const width = this.isExpanded ? this.width[0] : this.width[1]
-    this.element.style.width = width
+  expandCard() {
+    if (!this.isNewValue) return
+    this.element.style.width = this.width['large']
+    // FIXME: not working with class toggle.
+    // this.element.classList.toggle(`w-[${this.width['small']}]`)
+    // this.element.classList.toggle(`w-[${this.width['large']}]`)
     this.isExpanded = !this.isExpanded
-    this.element.style.transition = 'all .4s ease-in'
   }
 
   addKeyMapping() {
@@ -48,13 +51,33 @@ export default class extends Controller {
   }
 
   pushCard() {
-    this.copyContentFromEditableDiv()
-    this.element.requestSubmit()
+    this.#copyContentFromEditableDiv()
+    if (this.#validateForm()) this.element.requestSubmit()
   }
 
-  copyContentFromEditableDiv() {
-    // TODO: Validation needed.
+  #validateForm() {
+    if (this.titleInputTarget.value.trim() !== '' || this.textInputTarget.value.trim() !== '') return true
+
+    this.#dismissCard('#validateForm')
+    return false
+  }
+
+  #copyContentFromEditableDiv() {
     this.titleInputTarget.value = this.titleTarget.innerText
     this.textInputTarget.value = this.textTarget.innerText
+  }
+
+  #dismissOnFocusOut(event) {
+    // only dismiss when the next target element is not within the new card, so tab focus change won't break the form
+    if (event.relatedTarget && this.element.contains(event.relatedTarget)) return
+
+    this.#dismissCard('dismissOnFocus')
+  }
+
+  #dismissCard() {
+    // schedule DOM changes in a user supplied callback so it won't have focusout/blur bubbling problems with removal
+    requestAnimationFrame(() => {
+      this.element.remove()
+    })
   }
 }

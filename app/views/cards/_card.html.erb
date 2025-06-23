@@ -2,10 +2,10 @@
               data: { turbo: true,
                       controller: "card", 
                       "card-is-new-value": local_assigns[:new_card] || false,
-                      "action": "click->card#toggleExpansion",
                       "card-is-expanded-value": "false"
                     },
-              class: 'w-60 mx-2 rounded-lg border mb-4 border-gray-300 box-border shadow-sm hover:shadow-gray-400 max-h-72 overflow-hidden',
+              class: 'mx-2 rounded-lg border mb-4 border-gray-300 box-border shadow-sm hover:shadow-gray-400
+                      max-h-72 overflow-hidden transition-all duration-[.4s] ease-in w-[15rem]',
               id: (local_assigns[:new_card] ? "new-form" : dom_id(card))) do |f| %>
   <%= f.hidden_field :title, "data-card-target": "titleInput" %>
   <%= f.hidden_field :text, "data-card-target": "textInput" %>
@@ -18,6 +18,7 @@
     <% #  TODO: put placeholders for title and text  %>
     <% #  TODO: should we let content have rich text or only plain text? Also # FIXME: if using it, in chrome it seems to add more whitespace for no reason %>
     <div
+      data-action="focus->card#expandCard"
       data-card-target="title"
       class="px-3 py-2 border-b border-dashed border-gray-300 text-red-800 font-semibold"
       contenteditable="true">
